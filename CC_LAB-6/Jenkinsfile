@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Clone Repository') {
+            steps {
+                git 'https://github.com/YOUR_USERNAME/YOUR_REPO.git'
+            }
+        }
+
+        stage('Build Backend Image') {
+            steps {
+                sh 'docker build -t backend-image ./backend'
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                sh 'docker run -d --name backend-container backend-image'
+            }
+        }
+
+    }
+}
